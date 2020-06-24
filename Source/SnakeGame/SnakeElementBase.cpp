@@ -11,6 +11,7 @@ ASnakeElementBase::ASnakeElementBase()
 	PrimaryActorTick.bCanEverTick = true;
 	MeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("MeshComponent"));
 
+
 }
 
 // Called when the game starts or when spawned

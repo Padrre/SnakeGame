@@ -9,6 +9,7 @@ ASnakeBase::ASnakeBase()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+	ElementSize = 100.0f;
 
 }
 
@@ -16,8 +17,8 @@ ASnakeBase::ASnakeBase()
 void ASnakeBase::BeginPlay()
 {
 	Super::BeginPlay();
-
-	GetWorld()->SpawnActor<ASnakeElementBase>(SnakeElementClass, GetActorTransform());
+	AddSnakeElement(4);
+	
 	
 }
 
@@ -25,6 +26,20 @@ void ASnakeBase::BeginPlay()
 void ASnakeBase::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+
+}
+
+void ASnakeBase::AddSnakeElement(int ElementsNum)
+{
+
+	for (int i = 0; i < ElementsNum; ++i)
+	{
+		FVector NewLocation(SnakeElements.Num() * ElementSize, 0, 0);
+		FTransform NewTransform(NewLocation);
+		auto NewSnakeElem = GetWorld()->SpawnActor<ASnakeElementBase>(SnakeElementClass, NewTransform);
+		SnakeElements.Add(NewSnakeElem);
+	}
+
 
 }
 
